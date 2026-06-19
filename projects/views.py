@@ -18,7 +18,6 @@ class ProjectListView(View):
         page_obj = paginator.get_page(page_number)
         return render(request, 'projects/project_list.html', {
             'page_obj': page_obj,
-            'projects': projects,
             'query_prefix': '',
         })
 
@@ -94,7 +93,10 @@ class ToggleParticipateView(LoginRequiredMixin, View):
         project = get_object_or_404(Project, id=project_id)
         user = request.user
         if user == project.owner:
-            return JsonResponse({'status': 'error', 'message': 'Владелец не может быть участником'}, status=400)
+            return JsonResponse(
+                {'status': 'error', 'message': 'Владелец не может быть участником'},
+                status=400,
+            )
         if user in project.participants.all():
             project.participants.remove(user)
             participating = False
@@ -116,5 +118,9 @@ class CompleteProjectView(LoginRequiredMixin, View):
 
 class FavoriteProjectsView(LoginRequiredMixin, View):
     def get(self, request):
-        projects = request.user.favorites.all().select_related('owner').prefetch_related('participants')
+        projects = (
+            request.user.favorites.all()
+            .select_related('owner')
+            .prefetch_related('participants')
+        )
         return render(request, 'projects/favorite_projects.html', {'projects': projects})

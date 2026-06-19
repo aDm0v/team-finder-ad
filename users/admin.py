@@ -14,9 +14,13 @@ class UserAdmin(BaseUserAdmin):
 
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Личные данные', {'fields': ('name', 'surname', 'avatar', 'about', 'phone', 'github_url')}),
+        ('Личные данные', {'fields': (
+            'name', 'surname', 'avatar', 'about', 'phone', 'github_url',
+        )}),
         ('Избранное', {'fields': ('favorites',)}),
-        ('Права', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Права', {'fields': (
+            'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions',
+        )}),
     )
     add_fieldsets = (
         (None, {
