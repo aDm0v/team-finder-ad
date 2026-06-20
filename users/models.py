@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 
+from team_finder.validators import validate_github_url, validate_phone
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, name, surname, password=None, **extra_fields):
@@ -19,21 +21,24 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True)
-    name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
-    about = models.TextField(blank=True)
-    phone = models.CharField(max_length=30, blank=True)
-    github_url = models.URLField(blank=True)
+    NAME_MAX_LENGTH = 100
+
+    email = models.EmailField(unique=True, verbose_name='Email')
+    name = models.CharField(max_length=NAME_MAX_LENGTH, verbose_name='Имя')
+    surname = models.CharField(max_length=NAME_MAX_LENGTH, verbose_name='Фамилия')
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, verbose_name='Аватар')
+    about = models.TextField(blank=True, verbose_name='О себе')
+    phone = models.CharField(max_length=20, blank=True, verbose_name='Телефон', validators=[validate_phone])
+    github_url = models.URLField(blank=True, verbose_name='GitHub', validators=[validate_github_url])
     favorites = models.ManyToManyField(
         'projects.Project',
         related_name='favorited_by',
         blank=True,
+        verbose_name='Избранные проекты',
     )
-    date_joined = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(auto_now_add=True, verbose_name='Дата регистрации')
+    is_active = models.BooleanField(default=True, verbose_name='Активен')
+    is_staff = models.BooleanField(default=False, verbose_name='Сотрудник')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'surname']
@@ -41,6 +46,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
         ordering = ['-date_joined']
 
     def __str__(self):

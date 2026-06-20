@@ -1,13 +1,26 @@
-# TeamFinder — Инструкция по запуску
+# TeamFinder
 
-## Для ревьюера
+Платформа для поиска участников в IT-проекты.
 
-### Быстрый старт
+## Автор
+
+kanef1 — [github.com/kanef1](https://github.com/kanef1)
+
+## Технологический стек
+
+- Python 3 / Django 5.2
+- PostgreSQL 16
+- Docker / Docker Compose
+- Pillow
+
+---
+
+## Быстрый старт
 
 **1. Склонируйте репозиторий и перейдите в папку проекта:**
 
 ```bash
-git clone <url-репозитория>
+git clone https://github.com/kanef1/team-finder-ad.git
 cd team-finder-ad
 ```
 
@@ -48,7 +61,7 @@ python3 manage.py migrate
 python3 create_test_data.py
 ```
 
-Создаются 5 пользователей и 7 проектов.
+Создаются 5 пользователей и 8 проектов.
 
 **7. Запустите сервер разработки:**
 
@@ -56,11 +69,13 @@ python3 create_test_data.py
 python3 manage.py runserver
 ```
 
-Сайт доступен по адресу: **http://localhost:8000**
+Сайт доступен по адресу: [http://localhost:8000](http://localhost:8000)
+
+Панель администратора: [http://localhost:8000/admin/](http://localhost:8000/admin/)
 
 ---
 
-### Тестовые аккаунты
+## Тестовые аккаунты
 
 | Роль            | Email                  | Пароль      |
 |-----------------|------------------------|-------------|
@@ -70,26 +85,24 @@ python3 manage.py runserver
 | Пользователь 3  | carol@example.com      | password123 |
 | Пользователь 4  | dave@example.com       | password123 |
 
-Панель администратора: **http://localhost:8000/admin/**
-
 ---
 
-### Вариант задания
+## Вариант задания
 
 Реализован **Вариант 1**: «Избранное» и фильтрация пользователей.
 
 ---
 
-### Структура проекта
+## Структура проекта
 
 - `users/` — приложение для управления пользователями (регистрация, вход, профиль)
 - `projects/` — приложение для управления проектами (создание, избранное, участие)
-- `templates_var1/` — HTML-шаблоны для варианта 1
+- `templates_var1/` — HTML-шаблоны
 - `static/` — CSS, JS, изображения
 - `docker-compose.yml` — конфигурация PostgreSQL
 
 ---
 
-### Зависимости
+## Зависимости
 
 Все зависимости перечислены в `requirements.txt`. Для работы необходим Docker.
