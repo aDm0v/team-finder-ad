@@ -28,8 +28,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     surname = models.CharField(max_length=NAME_MAX_LENGTH, verbose_name='Фамилия')
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, verbose_name='Аватар')
     about = models.TextField(blank=True, verbose_name='О себе')
-    phone = models.CharField(max_length=20, blank=True, verbose_name='Телефон', validators=[validate_phone])
-    github_url = models.URLField(blank=True, verbose_name='GitHub', validators=[validate_github_url])
+    phone = models.CharField(
+        max_length=20, blank=True, verbose_name='Телефон', validators=[validate_phone],
+    )
+    github_url = models.URLField(
+        blank=True, verbose_name='GitHub', validators=[validate_github_url],
+    )
     favorites = models.ManyToManyField(
         'projects.Project',
         related_name='favorited_by',

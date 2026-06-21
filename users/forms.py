@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate
 
+from team_finder.validators import validate_github_url, validate_phone
 from users.models import User
 
 
@@ -46,3 +47,13 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['name', 'surname', 'avatar', 'about', 'phone', 'github_url']
+
+    def clean_github_url(self):
+        value = self.cleaned_data.get('github_url', '')
+        validate_github_url(value)
+        return value
+
+    def clean_phone(self):
+        value = self.cleaned_data.get('phone', '')
+        validate_phone(value)
+        return value

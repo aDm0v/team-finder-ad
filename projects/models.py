@@ -1,19 +1,21 @@
 from django.conf import settings
 from django.db import models
 
+from projects.constants import PROJECT_NAME_MAX_LENGTH
 from team_finder.validators import validate_github_url
 
 
 class Project(models.Model):
-    NAME_MAX_LENGTH = 200
 
     class Status(models.TextChoices):
         OPEN = 'open', 'Открыт'
         CLOSED = 'closed', 'Закрыт'
 
-    name = models.CharField(max_length=NAME_MAX_LENGTH, verbose_name='Название')
+    name = models.CharField(max_length=PROJECT_NAME_MAX_LENGTH, verbose_name='Название')
     description = models.TextField(blank=True, verbose_name='Описание')
-    github_url = models.URLField(blank=True, verbose_name='GitHub', validators=[validate_github_url])
+    github_url = models.URLField(
+        blank=True, verbose_name='GitHub', validators=[validate_github_url],
+    )
     status = models.CharField(
         max_length=max(len(s) for s in Status.values),
         choices=Status.choices,

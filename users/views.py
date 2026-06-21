@@ -75,11 +75,11 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def get_success_url(self):
-        return reverse('users:detail', kwargs={'user_id': self.request.user.id})
+        return reverse('users:detail', args=[self.request.user.id])
 
 
 class ChangePasswordView(BasePasswordChangeView):
     template_name = 'users/change_password.html'
 
     def get_success_url(self):
-        return reverse('users:detail', kwargs={'user_id': self.request.user.id})
+        return reverse('users:detail', args=[self.request.user.id])
