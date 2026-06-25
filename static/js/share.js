@@ -15,7 +15,7 @@ document.addEventListener("click", function (e) {
     .writeText(url)
     .then(() => {
       if (window.toast) {
-        window.toast("Ссылка скопирована: " + url, { type: 'info' });
+        window.toast("Ссылка скопирована: " + url, { type: "info" });
       } else {
         alert("Ссылка скопирована: " + url);
       }
@@ -40,7 +40,7 @@ function fallbackCopyTextToClipboard(text) {
     document.body.removeChild(textArea);
     if (!successful) throw new Error("document.execCommand copy failed");
     if (window.toast) {
-      window.toast("Ссылка скопирована: " + text, { type: 'info' });
+      window.toast("Ссылка скопирована: " + text, { type: "info" });
     } else {
       alert("Ссылка скопирована: " + text);
     }

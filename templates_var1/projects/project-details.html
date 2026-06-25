@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}{{ project.name }}{% endblock %}
@@ -44,7 +44,7 @@
 
                 {% if project.github_url %}
                 <p class="project-link">
-                    {% include 'includes/svg/github.html' %}
+                    {% include "includes/svg/github.html" %}
                     <a href="{{ project.github_url }}" target="_blank">Репозиторий на GitHub</a>
                 </p>
                 {% endif %}
@@ -57,17 +57,17 @@
                     data-fav="{% if project in user.favorites.all %}true{% else %}false{% endif %}"
                     title="Добавить в избранное"
             >
-                {% include 'includes/svg/heart.html' %}
+                {% include "includes/svg/heart.html" %}
             </button>
             {% endif %}
             <a href="#"
                class="black-button black-button-share share-button"
                data-url="/projects/{{ project.id }}">
-                {% include 'includes/svg/share.html' %}
+                {% include "includes/svg/share.html" %}
             </a>
             {% if user.id == project.owner.id %}
                 <a href="/projects/{{ project.id }}/edit" class="black-button">
-                    {% include 'includes/svg/pen.html' %}
+                    {% include "includes/svg/pen.html" %}
                     Редактировать
                 </a>
                 {% if project.status == "open" %}
@@ -119,7 +119,7 @@
         {% endfor %}
         </div>
     </div>
-    {% include 'includes/project-fav-toggle.js' %}
+    {% include "includes/project-fav-toggle.js" %}
 </div>
 {% endblock %}
 {% endwith %}

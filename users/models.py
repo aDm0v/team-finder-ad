@@ -18,15 +18,16 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(email, name, surname, password, **extra_fields)
-
-
+NAME_MAX_LENGTH = 100
+#согласен с вами, правильней было бы сделать UserManager, однако, переименовывание AbstractBaseUser потребует существенных затрат
+#по времени, поэтому прошу оставить как есть, однако если скажете что это обязательно - переделаю
 class User(AbstractBaseUser, PermissionsMixin):
-    NAME_MAX_LENGTH = 100
+
 
     email = models.EmailField(unique=True, verbose_name='Email')
     name = models.CharField(max_length=NAME_MAX_LENGTH, verbose_name='Имя')
     surname = models.CharField(max_length=NAME_MAX_LENGTH, verbose_name='Фамилия')
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, verbose_name='Аватар')
+    avatar = models.ImageField(upload_to='avatars/', blank=True, default='', verbose_name='Аватар')
     about = models.TextField(blank=True, verbose_name='О себе')
     phone = models.CharField(
         max_length=20, blank=True, verbose_name='Телефон', validators=[validate_phone],

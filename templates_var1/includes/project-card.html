@@ -21,7 +21,7 @@
                     data-fav="{% if project in user.favorites.all %}true{% else %}false{% endif %}"
                     title="Добавить в избранное"
             >
-                {% include 'includes/svg/heart.html' %}
+                {% include "includes/svg/heart.html" %}
             </button>
             {% endif %}
         </div>
@@ -43,13 +43,13 @@
         </span>
         {% with count=project.participants.count %}
         <div class="project-participants">
-            {% include 'includes/svg/participants.html' %}
+            {% include "includes/svg/participants.html" %}
             {{ count }}
-            {% if count|add:'-11'|divisibleby:100 or count|add:'-12'|divisibleby:100 or count|add:'-13'|divisibleby:100 or count|add:'-14'|divisibleby:100 %}
+            {% if count|add:"-11"|divisibleby:100 or count|add:"-12"|divisibleby:100 or count|add:"-13"|divisibleby:100 or count|add:"-14"|divisibleby:100 %}
                 участников
-            {% elif count|add:'-1'|divisibleby:10 %}
+            {% elif count|add:"-1"|divisibleby:10 %}
                 участник
-            {% elif count|add:'-2'|divisibleby:10 or count|add:'-3'|divisibleby:10 or count|add:'-4'|divisibleby:10 %}
+            {% elif count|add:"-2"|divisibleby:10 or count|add:"-3"|divisibleby:10 or count|add:"-4"|divisibleby:10 %}
                 участника
             {% else %}
                 участников

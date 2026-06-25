@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}Актуальные проекты{% endblock %}
@@ -12,11 +12,7 @@
 <div class="project-container">
     <div class="project-header">
         <h2 class="project-title">Актуальные проекты</h2>
-<<<<<<< HEAD
         {% if user.is_authenticated %}
-=======
-        {% if projects %}
->>>>>>> 389f0e1d55554761fc530d18093297793c439f7d
             <a href="/projects/create-project" class="black-button">+ Создать проект</a>
         {% endif %}
     </div>
@@ -24,9 +20,9 @@
 
     <div class="projects-grid">
         {% for project in page_obj %}
-        {% include 'includes/project-card.html' %}
+        {% include "includes/project-card.html" %}
         {% empty %}
-        {% include 'includes/empty-project-card.html' with empty_title="Пока нет проектов" empty_message="Создавайте проекты и делитесь ими с другими пользователями!" button_link="/projects/create-project" button_text="+ Создать проект" %}
+        {% include "includes/empty-project-card.html" with empty_title="Пока нет проектов" empty_message="Создавайте проекты и делитесь ими с другими пользователями!" button_link="/projects/create-project" button_text="+ Создать проект" %}
         {% endfor %}
     </div>
     {% if page_obj.has_other_pages %}
@@ -46,7 +42,7 @@
         {% endif %}
     </div>
     {% endif %}
-    {% include 'includes/project-fav-toggle.js' %}
+    {% include "includes/project-fav-toggle.js" %}
 </div>
 
 {% endblock %}

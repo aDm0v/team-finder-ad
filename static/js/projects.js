@@ -22,15 +22,15 @@
             const statusEl = document.querySelector(".project-status-black");
             if (statusEl) statusEl.textContent = "Закрыт";
             completeBtn.remove();
-            if (window.toast) window.toast("Проект завершён", { type: 'info' });
+            if (window.toast) window.toast("Проект завершён", { type: "info" });
           } else {
-            if (window.toast) window.toast("Ошибка при завершении проекта", { type: 'error' });
+            if (window.toast) window.toast("Ошибка при завершении проекта", { type: "error" });
             else alert("Ошибка при завершении проекта");
           }
         })
         .catch(err => {
           console.error("Ошибка запроса:", err);
-          if (window.toast) window.toast("Ошибка сети", { type: 'error' });
+          if (window.toast) window.toast("Ошибка сети", { type: "error" });
         });
       });
     }
@@ -59,7 +59,7 @@
         .then(resp => resp.json())
         .then(data => {
           if (data.status !== "ok") {
-            if (window.toast) window.toast("Ошибка при изменении участия", { type: 'error' });
+            if (window.toast) window.toast("Ошибка при изменении участия", { type: "error" });
             else alert("Ошибка при изменении участия");
             return;
           }
@@ -105,7 +105,7 @@
         })
         .catch(err => {
           console.error("Ошибка запроса:", err);
-          if (window.toast) window.toast("Ошибка сети", { type: 'error' });
+          if (window.toast) window.toast("Ошибка сети", { type: "error" });
         });
       });
     }

@@ -23,7 +23,7 @@
                 <h2 class="profile-name">{{ user.name }} {{ user.surname }}</h2>
                 <p class="profile-description">
                     {{ user.about|default:"Описание профиля пока не добавлено." }}
-                </p>
+                </p> 
                 <div class="profile-contacts">
                     {% if user.email %}
                     <span>{% include 'includes/svg/email.html' %} {{ user.email }}</span>

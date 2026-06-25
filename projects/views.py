@@ -15,33 +15,33 @@ from team_finder.utils import paginate
 
 
 def project_list(request):
-    projects = Project.objects.select_related('owner').prefetch_related('participants')
+    projects = Project.objects.select_related("owner").prefetch_related("participants")
     page_obj = paginate(request, projects)
-    return render(request, 'projects/project_list.html', {
-        'page_obj': page_obj,
-        'query_prefix': '',
+    return render(request, "projects/project_list.html", {
+        "page_obj": page_obj,
+        "query_prefix": "",
     })
 
 
 def project_detail(request, project_id):
     project = get_object_or_404(
-        Project.objects.select_related('owner').prefetch_related('participants'),
+        Project.objects.select_related("owner").prefetch_related("participants"),
         id=project_id,
     )
-    return render(request, 'projects/project-details.html', {'project': project})
+    return render(request, "projects/project-details.html", {"project": project})
 
 
 class CreateProjectView(LoginRequiredMixin, CreateView):
     model = Project
     form_class = ProjectForm
-    template_name = 'projects/create-project.html'
+    template_name = "projects/create-project.html"
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('projects:detail', args=[self.object.id])
+        return reverse("projects:detail", args=[self.object.id])
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(**kwargs, is_edit=False)
@@ -50,23 +50,23 @@ class CreateProjectView(LoginRequiredMixin, CreateView):
 class EditProjectView(LoginRequiredMixin, UpdateView):
     model = Project
     form_class = ProjectForm
-    template_name = 'projects/create-project.html'
-    pk_url_kwarg = 'project_id'
+    template_name = "projects/create-project.html"
+    pk_url_kwarg = "project_id"
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return super().dispatch(request, *args, **kwargs)
-        self._project = get_object_or_404(Project, pk=kwargs['project_id'])
+        self._project = get_object_or_404(Project, pk=kwargs["project_id"])
         if self._project.owner != request.user:
-            messages.error(request, 'Редактировать проект может только его владелец.')
-            return redirect('projects:detail', project_id=self._project.pk)
+            messages.error(request, "Редактировать проект может только его владелец.")
+            return redirect("projects:detail", project_id=self._project.pk)
         return super().dispatch(request, *args, **kwargs)
 
     def get_object(self):
         return self._project
 
     def get_success_url(self):
-        return reverse('projects:detail', args=[self.object.id])
+        return reverse("projects:detail", args=[self.object.id])
 
     def get_context_data(self, **kwargs):
         return super().get_context_data(**kwargs, is_edit=True)
@@ -82,7 +82,7 @@ def toggle_favorite(request, project_id):
         user.favorites.remove(project)
     else:
         user.favorites.add(project)
-    return JsonResponse({'status': 'ok', 'favorite': not is_fav})
+    return JsonResponse({"status": "ok", "favorite": not is_fav})
 
 
 @login_required
@@ -92,7 +92,7 @@ def toggle_participate(request, project_id):
     user = request.user
     if user == project.owner:
         return JsonResponse(
-            {'status': 'error', 'message': 'Нельзя участвовать в собственном проекте'},
+            {"status": "error", "message": "Нельзя участвовать в собственном проекте"},
             status=HTTPStatus.BAD_REQUEST,
         )
     is_participant = project.participants.filter(pk=user.pk).exists()
@@ -100,7 +100,7 @@ def toggle_participate(request, project_id):
         project.participants.remove(user)
     else:
         project.participants.add(user)
-    return JsonResponse({'status': 'ok', 'participant': not is_participant})
+    return JsonResponse({"status": "ok", "participant": not is_participant})
 
 
 @login_required
@@ -109,19 +109,19 @@ def complete_project(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     if project.owner != request.user:
         return JsonResponse(
-            {'status': 'error', 'message': 'Только владелец может завершить проект'},
+            {"status": "error", "message": "Только владелец может завершить проект"},
             status=HTTPStatus.FORBIDDEN,
         )
     project.status = Project.Status.CLOSED
     project.save()
-    return JsonResponse({'status': 'ok'})
+    return JsonResponse({"status": "ok"})
 
 
 @login_required
 def favorite_projects(request):
     projects = (
         request.user.favorites.all()
-        .select_related('owner')
-        .prefetch_related('participants')
+        .select_related("owner")
+        .prefetch_related("participants")
     )
-    return render(request, 'projects/favorite_projects.html', {'projects': projects})
+    return render(request, "projects/favorite_projects.html", {"projects": projects})

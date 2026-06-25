@@ -1,5 +1,5 @@
 inline-quotes = "
-max-line-length = 88
+max-line-length = 1--
 exclude =
     venv,
     migrations,
