@@ -1,5 +1,4 @@
 from django.contrib.auth import login, logout
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView as BasePasswordChangeView
 from django.shortcuts import get_object_or_404, redirect, render

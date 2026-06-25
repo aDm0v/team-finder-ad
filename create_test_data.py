@@ -4,14 +4,15 @@
 """
 import os
 import sys
+
 import django
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'team_finder.settings')
 django.setup()
 
-from users.models import User  # noqa: E402
 from projects.models import Project  # noqa: E402
+from users.models import User  # noqa: E402
 
 users_data = [
     {
@@ -21,10 +22,10 @@ users_data = [
         'password': 'admin123',
         'is_staff': True,
         'is_superuser': True,
-        'about': 'Администратор платформы TeamFinder',
+        'about': 'Администратор платформы',
     },
     {
-        'email': 'alice@example.com',
+        'email': 'user1@example.com',
         'name': 'Алиса',
         'surname': 'Иванова',
         'password': 'password123',
@@ -33,27 +34,27 @@ users_data = [
         'phone': '+7 900 000 0001',
     },
     {
-        'email': 'bob@example.com',
+        'email': 'user2@example.com',
         'name': 'Борис',
         'surname': 'Сидоров',
         'password': 'password123',
-        'about': 'Backend-разработчик на Python/Django',
+        'about': 'Backend-разработчик, люблю Python/Django',
         'github_url': 'https://github.com/bob',
     },
     {
-        'email': 'carol@example.com',
+        'email': 'user3@example.com',
         'name': 'Карина',
         'surname': 'Смирнова',
         'password': 'password123',
-        'about': 'UX/UI дизайнер с опытом в Figma',
+        'about': 'UX/UI дизайнер с опытом в Figma и Adobe XD',
         'phone': '+7 900 000 0003',
     },
     {
-        'email': 'dave@example.com',
+        'email': 'user4@example.com',
         'name': 'Дмитрий',
         'surname': 'Козлов',
         'password': 'password123',
-        'about': 'Fullstack-разработчик, интересуюсь ML',
+        'about': 'Fullstack-разработчик, работаю с Django и Vue.js',
     },
 ]
 
@@ -153,4 +154,4 @@ for data in projects_data:
 
 print('\nТестовые данные созданы!')
 print('Логин администратора: admin@example.com / admin123')
-print('Логин пользователей: alice@example.com, bob@example.com и др. / password123')
+print('Логин пользователей: user1@example.com, user2@example.com и др. / password123')

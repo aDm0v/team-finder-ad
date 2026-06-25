@@ -4,7 +4,7 @@
 
 ## Автор
 
-kanef1 — [github.com/kanef1](https://github.com/kanef1)
+aDm0v(Ушаков Олег) (github.com/aDm0v; https://github.com/aDm0v)
 
 ## Технологический стек
 
@@ -20,7 +20,7 @@ kanef1 — [github.com/kanef1](https://github.com/kanef1)
 **1. Склонируйте репозиторий и перейдите в папку проекта:**
 
 ```bash
-git clone https://github.com/kanef1/team-finder-ad.git
+git clone https://github.com/aDm0v/team-finder-ad.git
 cd team-finder-ad
 ```
 
@@ -28,8 +28,8 @@ cd team-finder-ad
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate  # Linux/Mac
-# или venv\Scripts\activate  # Windows
+source venv\Scripts\activate  # Windows
+# или venv/bin/activate  # Linux/Mac
 pip install -r requirements.txt
 ```
 
@@ -80,10 +80,10 @@ python3 manage.py runserver
 | Роль            | Email                  | Пароль      |
 |-----------------|------------------------|-------------|
 | Администратор   | admin@example.com      | admin123    |
-| Пользователь 1  | alice@example.com      | password123 |
-| Пользователь 2  | bob@example.com        | password123 |
-| Пользователь 3  | carol@example.com      | password123 |
-| Пользователь 4  | dave@example.com       | password123 |
+| Пользователь 1  | user1@example.com      | password123 |
+| Пользователь 2  | user2@example.com      | password123 |
+| Пользователь 3  | user3@example.com      | password123 |
+| Пользователь 4  | user4@example.com      | password123 |
 
 ---
 
