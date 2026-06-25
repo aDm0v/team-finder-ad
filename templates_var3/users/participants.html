@@ -59,7 +59,11 @@
     </div>
     {% endif %}
     {% else %}
+<<<<<<< HEAD
     {% include 'includes/empty-project-card.html' with empty_title="Пока нет участников" empty_message="Попробуйте сбросить фильтр" button_link="/users/list" button_text="Сбросить" %}
+=======
+    {% include 'includes/empty-project-card.html' with empty_title="Пока нет участников" empty_message="На платформе пока нет зарегистрированных участников" button_link="/users/list" button_text="Обновить" %}
+>>>>>>> 389f0e1d55554761fc530d18093297793c439f7d
     {% endif %}
 </div>
 {% endblock %}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -19,3 +20,14 @@ if settings.DEBUG:
         settings.STATIC_URL,
         document_root=settings.STATIC_ROOT
     )
+=======
+from django.contrib import admin
+from django.shortcuts import redirect
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+
+]
+>>>>>>> 389f0e1d55554761fc530d18093297793c439f7d
