@@ -67,6 +67,9 @@ db.sqlite3-journal
 # Sphinx documentation
 docs/_build/
 
+# Ruff
+.ruff_cache/
+
 # PyBuilder
 .pybuilder/
 target/
