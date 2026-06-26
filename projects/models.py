@@ -8,7 +8,7 @@ from team_finder.validators import validate_github_url
 class Project(models.Model):
 
     class Status(models.TextChoices):
-        OPEN = "open", "Открыт"
+        OPEN = "open", "Открыт" 
         CLOSED = "closed", "Закрыт" 
 
     name = models.CharField(max_length=PROJECT_NAME_MAX_LENGTH, verbose_name="Название")
