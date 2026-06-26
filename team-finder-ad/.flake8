@@ -1,6 +1,0 @@
-inline-quotes = "
-max-line-length = 100
-exclude =
-    venv,
-    migrations,
-    __pycache__
