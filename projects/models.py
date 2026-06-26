@@ -9,7 +9,7 @@ class Project(models.Model):
 
     class Status(models.TextChoices):
         OPEN = "open", "Открыт"
-        CLOSED = "closed", "Закрыт"
+        CLOSED = "closed", "Закрыт" 
 
     name = models.CharField(max_length=PROJECT_NAME_MAX_LENGTH, verbose_name="Название")
     description = models.TextField(blank=True, verbose_name="Описание")
