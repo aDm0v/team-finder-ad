@@ -9,6 +9,10 @@ from team_finder.utils import paginate
 from users.forms import EditProfileForm, LoginForm, RegisterForm
 from users.models import User
 
+FILTER_OWNERS_OF_FAVORITE_PROJECTS = 'owners-of-favorite-projects'
+FILTER_OWNERS_OF_PARTICIPATING_PROJECTS = 'owners-of-participating-projects'
+FILTER_INTERESTED_IN_MY_PROJECTS = 'interested-in-my-projects'
+FILTER_PARTICIPANTS_OF_MY_PROJECTS = 'participants-of-my-projects'
 
 class RegisterView(CreateView):
     model = User
@@ -36,34 +40,34 @@ def user_detail(request, user_id):
     profile_user = get_object_or_404(User, id=user_id)
     return render(request, 'users/user-details.html', {'user': profile_user})
 
-
 def user_list(request):
     active_filter = request.GET.get('filter', '')
     users = User.objects.all()
 
     if request.user.is_authenticated and active_filter:
-        if active_filter == 'owners-of-favorite-projects':
+        if active_filter == FILTER_OWNERS_OF_FAVORITE_PROJECTS:
             fav_projects = request.user.favorites.all()
-            users = User.objects.filter(owned_projects__in=fav_projects).distinct()
-        elif active_filter == 'owners-of-participating-projects':
+            users = User.objects.filter(
+                owned_projects__in=fav_projects
+            ).distinct()
+
+        elif active_filter == FILTER_OWNERS_OF_PARTICIPATING_PROJECTS:
             participating = request.user.participating_projects.all()
-            users = User.objects.filter(owned_projects__in=participating).distinct()
-        elif active_filter == 'interested-in-my-projects':
+            users = User.objects.filter(
+                owned_projects__in=participating
+            ).distinct()
+
+        elif active_filter == FILTER_INTERESTED_IN_MY_PROJECTS:
             my_projects = request.user.owned_projects.all()
-            users = User.objects.filter(favorites__in=my_projects).distinct()
-        elif active_filter == 'participants-of-my-projects':
+            users = User.objects.filter(
+                favorites__in=my_projects
+            ).distinct()
+
+        elif active_filter == FILTER_PARTICIPANTS_OF_MY_PROJECTS:
             my_projects = request.user.owned_projects.all()
-            users = User.objects.filter(participating_projects__in=my_projects).distinct()
-
-    page_obj = paginate(request, users)
-    query_prefix = f'filter={active_filter}&' if active_filter else ''
-
-    return render(request, 'users/participants.html', {
-        'page_obj': page_obj,
-        'active_filter': active_filter,
-        'query_prefix': query_prefix,
-    })
-
+            users = User.objects.filter(
+                participating_projects__in=my_projects
+            ).distinct()
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = User
